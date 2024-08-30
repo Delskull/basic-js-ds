@@ -83,19 +83,66 @@ class BinarySearchTree {
     }
   }
 
-  remove(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  remove(data) {
+      this.rootNode = deleteNode(this.rootNode, data)
+
+      function deleteNode(node, data) {
+          if (!node) {
+              return null;
+          }
+          if (data < node.data) {
+              node.left = deleteNode(node.left, data)
+              {
+                  return node
+              }
+          }
+          if (data > node.data) {
+              node.right = deleteNode(node.right, data)
+              {
+                  return node
+              }
+          }
+        else {
+            if (!node.left){
+                return node.right
+            }
+            if (!node.right){
+                return node.left
+            }
+            let minRight = minimum(node.right)
+              node.data = minRight.data
+              node.right = deleteNode(node.right, minRight.data);
+              return node;
+          }
+      }
+      function minimum(node) {
+          while (node.left) {
+              node = node.left;
+          }
+          return node;
+      }
   }
 
   min() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if (!this.rootNode){
+        return null;
+    }
+    let rootCur = this.rootNode
+      while (rootCur.left){
+        rootCur = rootCur.left
+      }
+    return rootCur.data
   }
 
   max() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+      if (!this.rootNode){
+          return null;
+      }
+      let rootCur = this.rootNode
+      while (rootCur.right){
+          rootCur = rootCur.right
+      }
+      return rootCur.data
   }
 }
 
